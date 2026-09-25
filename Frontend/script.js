@@ -1,17 +1,38 @@
 const button = document.getElementById("summarizeBtn");
-const textArea = document.getElementById("studyText");
-const summary = document.getElementById("summary");
+const input = document.getElementById("studyText");
+const output = document.getElementById("summary");
 
-button.addEventListener("click", function () {
+button.addEventListener("click", async () => {
+    const text = input.value.trim();
 
-    const text = textArea.value.trim();
-
-    if (text === "") {
-        summary.textContent = "Please enter some study material first.";
+    if (!text) {
+        output.textContent = "Please enter some study material.";
         return;
     }
 
-    summary.textContent =
-        "Your study material is ready to be processed by SnapStudy AI.";
+    output.textContent = "Generating summary...";
 
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:5000/summarize",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ text })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Something went wrong");
+        }
+
+        output.textContent = data.summary;
+    } catch (error) {
+        output.textContent =
+            "Backend is not connected. Please start the backend.";
+    }
 });
