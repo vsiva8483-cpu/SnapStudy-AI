@@ -14,7 +14,7 @@ button.addEventListener("click", async () => {
 
     try {
         const response = await fetch(
-            "http://127.0.0.1:5000/summarize",
+            "https://snapstudy-ai-90sp.onrender.com/summarize",
             {
                 method: "POST",
                 headers: {
