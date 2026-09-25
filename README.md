@@ -43,11 +43,11 @@ The project is currently under development, with plans to expand its learning fe
 
 ```text
 SnapStudy-AI/
-├── frontend/
+├── Frontend/
 │   ├── index.html
 │   ├── style.css
 │   └── script.js
-├── backend/
+├── Backend/
 │   ├── app.py
 │   └── requirements.txt
 ├── models/
